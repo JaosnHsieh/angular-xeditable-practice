@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-cloak>
+<head>
+     <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Node/Angular Table App</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #todo-list              { margin-bottom:30px; }
+    </style>
+
+    <!-- SPELLS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+    <link href="./css/xeditable.css" rel="stylesheet">
+    <script src="./js/xeditable.js"></script>
+    <script src="./js/core.1.5.js" ></script>
+
+  
+
+</head>
+
+
+<body ng-controller="mainController">   
+<div ng-controller="Ctrl">
+    <div style="border:2px solid red;">
+       papers: <br>
+        {{papers}}
+    </div>
+   
+   
+
+
+    <table class="table table-bordered table-hover table-condensed">
+           <tr>
+                    <th>ID</th>
+                    <th>來文</th>
+                    <th>來文號</th>
+                    <th>去文</th>
+                    <th>去文號</th>
+                    <th>摘要</th>
+                    <th>控制</th>
+                           
+            </tr>
+
+        <tr ng-repeat="paper in papers">
+         
+            
+        <td>
+             <span editable-text="paper.name"  e-name="id" onbeforesave="checkName($data)" e-required>{{ paper.id || 'empty' }}</span>
+            <!--<span editable-text="paper.name" e-name="id" e-form="rowform" onbeforesave="checkName($data, user.id)">
+          {{ paper.id || 'empty' }}
+        </span>-->
+            <!--{{paper.id}}-->
+             <!--editable username (text with validation) 
+            <span editable-text="paper.name" e-name="name" e-form="rowform" onbeforesave="checkName($data, user.id)" e-required>
+            {{ paper.id || 'empty' }}
+            </span>-->
+            
+        </td>
+        <td>
+            {{paper.fromtext}}
+             <!--editable status (select-local) 
+            <span editable-select="user.status" e-name="status" e-form="rowform" e-ng-options="s.value as s.text for s in statuses">
+            {{ showStatus(user) }}
+            </span>-->
+        </td>
+        <td>
+            {{paper.fromnumber}}
+             <!--editable group (select-remote) 
+            <span editable-select="user.group" e-name="group" onshow="loadGroups()" e-form="rowform" e-ng-options="g.id as g.text for g in groups">
+            {{ showGroup(user) }}
+            </span>-->
+        </td>
+        <td style="white-space: nowrap">
+            {{paper.totext}}
+             <!--form 
+            <form editable-form name="rowform" onbeforesave="saveUser($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+            <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                save
+            </button>
+            <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                cancel
+            </button>
+            </form>
+            <div class="buttons" ng-show="!rowform.$visible">
+            <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+            <button class="btn btn-danger" ng-click="removeUser($index)">del</button>
+            </div>  -->
+        </td>
+        <td>
+            {{paper.tonumber}}
+        </td>
+        <td>
+            {{paper.summary}}
+        </td>
+        <td style="white-space: nowrap">
+             <form editable-form name="rowform" onbeforesave="saveUser($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == paper">
+          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+            save
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+            cancel
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+          <button class="btn btn-danger" ng-click="removeUser($index)">del</button>
+        </div>  
+
+        </td>
+
+        <td>
+            {{rowform.$visible}}
+        </td>
+
+
+        </tr>
+  </table>
+
+
+      
+
+
+</div>
+
+        
+</body>
+</html>
